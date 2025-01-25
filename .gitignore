@@ -1,0 +1,12 @@
+*.exe
+# Build output directory
+/build/
+bin/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.iml
+
+# Environment variables
+.env
