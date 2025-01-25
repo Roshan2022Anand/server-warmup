@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/joho/godotenv"
 	"io"
 	"log"
 	"net/http"
 	"os"
 	"time"
-
-	"github.com/joho/godotenv"
 )
 
 // to check if the server is up
@@ -51,5 +50,10 @@ func main() {
 	}()
 
 	http.HandleFunc("/", homeRoute) //route to check if the server is up
-	log.Fatal(http.ListenAndServe(":8000", nil))
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000"
+	}
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
