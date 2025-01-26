@@ -22,7 +22,8 @@ func warmUpServer() {
 	backendURL := "https://snippet-stack.onrender.com"
 	res, err := http.Get(backendURL)
 
-	fmt.Println(backendURL)
+	url := os.Getenv("WARMUP_SERVER_URL")
+	fmt.Println(url)
 	if err != nil {
 		log.Printf("Error while making request to backend server %s\n", err)
 		return
