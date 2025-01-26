@@ -39,12 +39,7 @@ func warmUpServer() {
 
 func main() {
 
-	err := godotenv.Load("./.env")
-	if err != nil {
-		log.Fatalf("Error loading .env file %v", err)
-	}
-	url := os.Getenv("WARMUP_SERVER_URL")
-	fmt.Println(url)
+	godotenv.Load()
 
 	//to call warmUpServer func every 25 minutes
 	go func() {
