@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/joho/godotenv"
+	// "github.com/joho/godotenv"
 	"io"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/joho/godotenv"
 )
 
 // to check if the server is up
@@ -17,8 +19,10 @@ func homeRoute(w http.ResponseWriter, r *http.Request) {
 
 // to warm up the server
 func warmUpServer() {
-	backendURL := os.Getenv("WARMUP_SERVER_URL")
+	backendURL := "https://snippet-stack.onrender.com"
 	res, err := http.Get(backendURL)
+
+	fmt.Println(backendURL)
 	if err != nil {
 		log.Printf("Error while making request to backend server %s\n", err)
 		return
@@ -35,11 +39,12 @@ func warmUpServer() {
 
 func main() {
 
-	//load .env file
-	err := godotenv.Load()
+	err := godotenv.Load("./.env")
 	if err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
+		log.Fatalf("Error loading .env file %v", err)
 	}
+	url := os.Getenv("WARMUP_SERVER_URL")
+	fmt.Println(url)
 
 	//to call warmUpServer func every 25 minutes
 	go func() {
